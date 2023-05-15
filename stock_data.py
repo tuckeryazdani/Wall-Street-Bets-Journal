@@ -24,27 +24,27 @@ def get_stock_price_delta(stocksFound : typing.Union[list,dict]):
     
     if "microsoft" in stocksFound:
         msft = yf.Ticker("MSFT").history(period="7d")["Close"]
-        msftChange=msft[-1]-msft[0]
+        msftChange=round(msft[-1]-msft[0],2)
         stockChange["microsoft"] = msftChange
         
     if "google" in stocksFound:
         goog = yf.Ticker("GOOG").history(period="7d")["Close"]
-        googChange=goog[-1]-goog[0]
+        googChange=round(goog[-1]-goog[0],2)
         stockChange["google"] = googChange
         
     if "meta" in stocksFound:
         fb=yf.Ticker("META").history(period="7d")["Close"]
-        fbChange=fb[-1]-fb[0]
+        fbChange=round(fb[-1]-fb[0],2)
         stockChange["meta"] = fbChange
         
     if "amazon" in stocksFound:
         amzn=yf.Ticker("AMZN").history(period="7d")["Close"]
-        amznChange=amzn[-1]-amzn[0]
+        amznChange=round(amzn[-1]-amzn[0],2)
         stockChange["amazon"] = amznChange
         
     if "netflix" in stocksFound:
         nflx = yf.Ticker("NFLX").history(period="7d")["Close"]
-        nflxChange=nflx[-1]-nflx[0]
+        nflxChange=round(nflx[-1]-nflx[0],2)
         stockChange["netflix"] = nflxChange
         
     return stockChange
@@ -75,12 +75,17 @@ def get_seasonal_trends(ticker : str):
     Output:
     seasonal_values - Dictionary that has a key value of one of the four seasons and a value pair that is the average value of the stock durring that season.
     '''
+    # Swap META ticker for FB ticker to get historical data. (META is a newer ticker symbol)
+    if ticker == 'META':
+        ticker = 'FB'
+    
     ticker_url = f'https://data.nasdaq.com/api/v3/datasets/WIKI/{ticker}.csv'
 
     with requests.Session() as s:
         response = s.get(ticker_url,headers={'Accept': 'application/json'})
         response = response.content.decode('utf-8')
 
+    # print(f'Response for {ticker_url}: {response}')
     data = io.StringIO(response)
     df_nasdaq = pd.read_csv(data,delimiter=',')
 
@@ -90,7 +95,10 @@ def get_seasonal_trends(ticker : str):
     # Cast "Date" column to datetime
     df_nasdaq['Date'] = pd.to_datetime(df_nasdaq['Date'])
     df_nasdaq['Season'] = df_nasdaq['Date'].apply(lambda x: identify_season(x))
-        
+    
+    unique_years = df_nasdaq['Date'].dropna().dt.year.nunique()
+    print(f'Unique Years in NASDAQ flat file: {unique_years}')
+    
     seasonal_values = {'Winter':None,'Spring':None,'Summer':None,'Fall':None}
     max_possible_row_count = float('inf')
     for season in seasonal_values:
@@ -98,6 +106,6 @@ def get_seasonal_trends(ticker : str):
             max_possible_row_count = len(df_nasdaq[df_nasdaq['Season'] == season])
     
     for season in seasonal_values:
-        seasonal_values[season] = df_nasdaq[df_nasdaq['Season'] == season]['Close'].head(max_possible_row_count).mean()
+        seasonal_values[season] = round(df_nasdaq[df_nasdaq['Season'] == season]['Close'].head(max_possible_row_count).mean()/unique_years,2)
     
     return seasonal_values
