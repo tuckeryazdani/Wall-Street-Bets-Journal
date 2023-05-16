@@ -4,7 +4,7 @@ This project is fully automated in Python using various APIs to pull data, get s
 <br><br>
 Technologies Used:
 <br>
-Languages : Python, HTML, CSS
+Languages : <i> Python, HTML, CSS </i>
 <br>
-Libraries : pandas, datetime, requests, io, yfinance, typing, warnings, praw, tweepy
+Libraries : <i> pandas, datetime, requests, io, yfinance, typing, warnings, praw, tweepy </i>
 <br>
