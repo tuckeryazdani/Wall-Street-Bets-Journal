@@ -6,5 +6,5 @@ Technologies Used:
 <br>
 Languages : <i> Python, HTML, CSS </i>
 <br>
-Libraries : <i> pandas, datetime, requests, io, yfinance, typing, warnings, praw, tweepy, openai </i>
+Libraries : <i> pandas, datetime, requests, io, yfinance, typing, warnings, praw, tweepy </i>
 <br>

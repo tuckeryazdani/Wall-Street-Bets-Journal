@@ -15,17 +15,11 @@ class Twitter_API:
                                     , consumer_key=TWITTER_API_KEY
                                     , consumer_secret=TWITTER_API_SECRET
                                     , return_type=dict)
-        
+
         # auth = tweepy.OAuthHandler(TWITTER_API_KEY, TWITTER_API_SECRET)
         # auth.set_access_token(TWITTER_ACCESS_TOKEN,TWITTER_ACCESS_TOKEN_SECRET)
         # self.api = tweepy.API(auth)
 
-<<<<<<< HEAD
-=======
-    def __init__(self,bearer_token,access_token,access_token_secret,consumer_key,consumer_secret):
-        self.twitter = tweepy.Client(bearer_token=bearer_token,access_token=access_token,access_token_secret=access_token_secret,consumer_key=consumer_key,consumer_secret=consumer_secret)        
-
->>>>>>> 14643f0fc9faa9ad28c4817b7325416389cac256
     def post_to_twitter(self, tweet : str):
         if len(tweet) > 280:
             raise Exception('Tweet goes over 280 character limit. Please revise.')
@@ -37,7 +31,6 @@ class Twitter_API:
                 f.write(f'{datetime.date.today()}\n{e}\n\n')
             raise e
     
-<<<<<<< HEAD
     def respond_to_mentions(self):
         with open('mentions.txt','r+') as f:
             tweets = self.client.search_recent_tweets(query='@WSB_Journal',max_results=TWITTER_MAX_QUERY_RESULTS)
@@ -55,5 +48,3 @@ class Twitter_API:
 if __name__ == '__main__':
     twitter = Twitter_API()
     twitter.respond_to_mentions()
-=======
->>>>>>> 14643f0fc9faa9ad28c4817b7325416389cac256

@@ -13,7 +13,7 @@ import warnings
 warnings.simplefilter(action='ignore', category=FutureWarning)
 
 def main():
-    reddit_client = Reddit_API(client_id = REDDIT_CLIENT_ID, client_secret = REDDIT_CLIENT_SECRET, user_agent = REDDIT_USER_AGENT, username = REDDIT_USERNAME, password = REDDIT_PASSWORD, stocks = list(COMPANY_NAME_TO_TICKER.keys()))
+    reddit_client = Reddit_API()
     stock_names_found = reddit_client.get_stock_mentions(DESIRED_SUBREDDIT)
     print(f'Stocks Found: {stock_names_found}')
     stockChanges = stock_data.get_stock_price_delta(stock_names_found)
@@ -66,15 +66,12 @@ ${most_mentioned_stock_price_delta} change in value the past 7 days.
     print(f'Tweet length: {len(tweet)}')
     print(f'Tweet:\n {tweet}')
     
-    twitter_client = Twitter_API(bearer_token=TWITTER_BEARER_TOKEN,access_token=TWITTER_ACCESS_TOKEN,access_token_secret=TWITTER_ACCESS_TOKEN_SECRET,consumer_key=TWITTER_API_KEY,consumer_secret=TWITTER_API_SECRET)
+    twitter_client = Twitter_API()
     # Post Tweet
     twitter_client.post_to_twitter(tweet)
-<<<<<<< HEAD
     
     twitter_client.respond_to_mentions()
     
-=======
->>>>>>> 14643f0fc9faa9ad28c4817b7325416389cac256
     return tweet
 
 if __name__ == '__main__':

@@ -14,3 +14,6 @@ Your Tweet text is too long. For more information on how Twitter determines text
 400 Bad Request
 Your Tweet text is too long. For more information on how Twitter determines text length see https://github.com/twitter/twitter-text.
 
+2023-05-19
+'Twitter_API' object has no attribute 'client'
+
