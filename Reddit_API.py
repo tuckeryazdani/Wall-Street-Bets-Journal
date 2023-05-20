@@ -15,16 +15,6 @@ class Reddit_API:
         )
         self.stocks = list(COMPANY_NAME_TO_TICKER.keys())
     
-    def __init__(self, client_id, client_secret, user_agent, username, password,stocks):
-        self.reddit = praw.Reddit(
-            client_id = client_id,
-            client_secret = client_secret,
-            user_agent = user_agent,
-            username = username,
-            password = password
-        )
-        self.stocks = stocks
-            
     def get_stock_mentions(self,desired_subreddit : str):
         '''
         Web scrapes Reddit for comments on the desiredSubreddit (Usually WallStreetBets). It then returns the stocks mentioned with counts as a dictionary.

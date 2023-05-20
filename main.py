@@ -33,7 +33,6 @@ if __name__ == '__main__':
 
     # Change working directory to use the repository of the website.
     os.chdir(WEBSITE_REPO_PATH)
-
     # Ensure that the repo is updated.
     os.system(f'git pull origin {GIT_BRANCH}')
 
