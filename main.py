@@ -28,7 +28,6 @@ def push_to_git():
     os.system(f'git push origin {GIT_BRANCH}')
 
 if __name__ == '__main__':
-    
     tweet = wsb.main()
 
     # Change working directory to use the repository of the website.

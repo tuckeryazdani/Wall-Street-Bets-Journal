@@ -1,6 +1,6 @@
 # Module Imports
 from variables import *
-import Open_AI_API
+import OpenAI_API
 
 # Library Imports
 import tweepy
@@ -39,7 +39,7 @@ class Twitter_API:
                 # print(mentions)
                 # print(tweet['id'],type(tweet['id'])) 
                 if tweet['id'] not in mentions:
-                    self.client.create_tweet(text=Open_AI_API.reply_to_tweet(tweet['text']),in_reply_to_tweet_id=tweet['id'])
+                    self.client.create_tweet(text=OpenAI_API.reply_to_tweet(tweet['text']),in_reply_to_tweet_id=tweet['id'])
                     f.write(tweet['id']+'\n')
                     f.seek(0)
                     mentions = f.read()

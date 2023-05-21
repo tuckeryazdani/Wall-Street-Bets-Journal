@@ -20,34 +20,13 @@ def get_stock_price_delta(stocksFound : typing.Union[list,dict]):
     Output:
     Returns a dictionary of stocks and how much their value has changed in the past 7 days. 
     '''
-    stockChange={}
+    stock_price_change={}
     
-    if "microsoft" in stocksFound:
-        msft = yf.Ticker("MSFT").history(period="7d")["Close"]
-        msftChange=round(msft[-1]-msft[0],2)
-        stockChange["microsoft"] = msftChange
-        
-    if "google" in stocksFound:
-        goog = yf.Ticker("GOOG").history(period="7d")["Close"]
-        googChange=round(goog[-1]-goog[0],2)
-        stockChange["google"] = googChange
-        
-    if "meta" in stocksFound:
-        fb=yf.Ticker("META").history(period="7d")["Close"]
-        fbChange=round(fb[-1]-fb[0],2)
-        stockChange["meta"] = fbChange
-        
-    if "amazon" in stocksFound:
-        amzn=yf.Ticker("AMZN").history(period="7d")["Close"]
-        amznChange=round(amzn[-1]-amzn[0],2)
-        stockChange["amazon"] = amznChange
-        
-    if "netflix" in stocksFound:
-        nflx = yf.Ticker("NFLX").history(period="7d")["Close"]
-        nflxChange=round(nflx[-1]-nflx[0],2)
-        stockChange["netflix"] = nflxChange
-        
-    return stockChange
+    for stock in stocksFound:
+        ticker = yf.Ticker(COMPANY_NAME_TO_TICKER[stock]).history(period="7d")["Close"]
+        stock_price_change[stock] = round(ticker[-1]-ticker[0],2)
+    
+    return stock_price_change
 
 def identify_season(date : datetime.date):
     '''
@@ -80,7 +59,7 @@ def get_seasonal_trends(ticker : str):
         ticker = 'FB'
     
     ticker_url = f'https://data.nasdaq.com/api/v3/datasets/WIKI/{ticker}.csv'
-
+    
     with requests.Session() as s:
         response = s.get(ticker_url,headers={'Accept': 'application/json'})
         response = response.content.decode('utf-8')

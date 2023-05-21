@@ -16,14 +16,14 @@ def main():
     reddit_client = Reddit_API()
     stock_names_found = reddit_client.get_stock_mentions(DESIRED_SUBREDDIT)
     print(f'Stocks Found: {stock_names_found}')
-    stockChanges = stock_data.get_stock_price_delta(stock_names_found)
-    print(f'Stock Changes: {stockChanges}')
+    stock_price_change = stock_data.get_stock_price_delta(stock_names_found)
+    print(f'Stock Changes: {stock_price_change}')
 
     # Find the stock with the most mentions, how many mentions it has, and how it is changing in the stock market.
     most_mentioned_stock = max(stock_names_found,key=stock_names_found.get)
     most_mentioned_stock_count = stock_names_found[most_mentioned_stock]
-    most_mentioned_stock_price_delta = stockChanges[most_mentioned_stock]
-        
+    most_mentioned_stock_price_delta = stock_price_change[most_mentioned_stock]
+    
     seasonal_trends = stock_data.get_seasonal_trends(COMPANY_NAME_TO_TICKER[most_mentioned_stock])
     current_season = stock_data.identify_season(datetime.date.today())
     
