@@ -33,7 +33,7 @@ class Twitter_API:
     
     def respond_to_mentions(self):
         with open('mentions.txt','r+') as f:
-            tweets = self.client.search_recent_tweets(query='@WSB_Journal',max_results=TWITTER_MAX_QUERY_RESULTS)
+            tweets = self.client.search_recent_tweets(query='@WSB_Journal',max_results=TWITTER_MAX_QUERY_RESULTS_FOR_MENTIONS)
             mentions = f.read()
             for tweet in tweets['data']:
                 # print(mentions)
