@@ -17,8 +17,8 @@ REDDIT_CLIENT_ID=r""
 REDDIT_CLIENT_SECRET=r""
 REDDIT_USER_AGENT=r""
 # Add username/password for a Reddit account.
-USERNAME=r""
-PASSWORD=r""
+REDDIT_USERNAME=r""
+REDDIT_PASSWORD=r""
 
 # Twitter Info
 TWITTER_API_KEY=r""
@@ -35,10 +35,6 @@ CALLBACKURL = r"oob"
 
 REDDIT_POSTS_TO_SCAN = 100
 DESIRED_SUBREDDIT = r"wallstreetbets"
-
-# Dictionary that converts company name to ticker symbol.
-COMPANY_NAME_TO_TICKER = {
-}
 
 # Seasonal data for the year 2000. (Leap year)
 START_OF_YEAR = datetime.date(2000,1,1)

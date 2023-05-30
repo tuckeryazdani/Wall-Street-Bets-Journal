@@ -11,8 +11,31 @@ import typing
 
 import warnings
 warnings.simplefilter(action='ignore', category=FutureWarning)
+import requests
+from bs4 import BeautifulSoup
 
-def get_stock_price_change(stocksFound : typing.Union[list,dict]):
+def get_company_name_to_ticker_dict():
+    url = 'https://en.wikipedia.org/wiki/List_of_S%26P_500_companies'
+    page = requests.get(url)
+    soup = BeautifulSoup(page.text, 'html.parser')
+
+    table = soup.find('table', {'class': 'wikitable sortable'})
+    rows = table.findAll('tr')
+
+    company_name_to_ticker = {}
+    for row in rows[1:501]:
+        data = row.findAll('td')
+        ticker = data[0].text.strip()
+        name = data[1].text.strip()
+        if ticker == 'GOOGL' :
+            name = 'Google'
+        elif ticker == 'META':
+            name = 'Meta'
+        company_name_to_ticker[name.lower()] = ticker.upper()
+    
+    return company_name_to_ticker
+    
+def get_stock_price_change(stocksFound : typing.Union[list,dict], COMPANY_NAME_TO_TICKER: dict):
     '''
     Returns a dictionary containing popular stock trends from the list/dictionary input.
     Parameters:

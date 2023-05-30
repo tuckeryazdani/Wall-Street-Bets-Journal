@@ -5,7 +5,7 @@ import pandas as pd
 
 class Reddit_API:
     
-    def __init__(self):
+    def __init__(self, COMPANY_NAME_TO_TICKER : dict):
         self.reddit = praw.Reddit(
             client_id = REDDIT_CLIENT_ID,
             client_secret = REDDIT_CLIENT_SECRET,

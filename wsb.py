@@ -16,21 +16,24 @@ def main():
     
     # Begin script.
     
+    # Get dictionary that converts company name to its ticker and also get top 500 companeis.
+    COMPANY_NAME_TO_TICKER = stock_data.get_company_name_to_ticker_dict()
+    
     # Initialize Reddit_API object to create a connection to the Reddit API.
-    reddit_client = Reddit_API()
+    reddit_client = Reddit_API(COMPANY_NAME_TO_TICKER)
     # Call the get_count_of_stock_mentions function to return a dictionary of stocks found and the number of times they were mentioned.
     stock_names_found = reddit_client.get_count_of_stock_mentions(DESIRED_SUBREDDIT)
     print(f'Stocks Found: {stock_names_found}')
-    
+
     # Use the Yahoo Fiance API to determine how much these stocks have changed in the past 7 days. 
-    stock_price_change = stock_data.get_stock_price_change(stock_names_found)
+    stock_price_change = stock_data.get_stock_price_change(stock_names_found, COMPANY_NAME_TO_TICKER)
     print(f'Stock Changes: {stock_price_change}')
 
     # Find the stock with the most mentions, how many mentions it has, and how it is changing in the stock market.
     most_mentioned_stock = max(stock_names_found,key=stock_names_found.get)
     most_mentioned_stock_count = stock_names_found[most_mentioned_stock]
     most_mentioned_stock_price_delta = stock_price_change[most_mentioned_stock]
-    
+        
     # Using the requests library, make a request to a NASSDAQ URL for CSV data of the most mentioned stock.  
     seasonal_trends = stock_data.get_seasonal_trends(COMPANY_NAME_TO_TICKER[most_mentioned_stock])
     # Using the datetime library, identify what is the current season of today.

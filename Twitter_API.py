@@ -39,7 +39,13 @@ class Twitter_API:
                 # print(mentions)
                 # print(tweet['id'],type(tweet['id'])) 
                 if tweet['id'] not in mentions:
-                    self.client.create_tweet(text=OpenAI_API.reply_to_tweet(tweet['text']),in_reply_to_tweet_id=tweet['id'])
+                    
+                    try:
+                        self.client.create_tweet(text=OpenAI_API.reply_to_tweet(tweet['text']),in_reply_to_tweet_id=tweet['id'])
+                    except Exception as e:
+                        print(tweet['text'])
+                        print(e)
+                        
                     f.write(tweet['id']+'\n')
                     f.seek(0)
                     mentions = f.read()
