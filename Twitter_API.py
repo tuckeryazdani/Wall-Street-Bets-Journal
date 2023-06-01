@@ -32,22 +32,21 @@ class Twitter_API:
             raise e
     
     def respond_to_mentions(self):
+        # Open .txt file that stores tweet IDs of tweets we responded to in the past
         with open('mentions.txt','r+') as f:
+            # Query all tweets that contain "@WSB_Journal"
             tweets = self.client.search_recent_tweets(query='@WSB_Journal',max_results=TWITTER_MAX_QUERY_RESULTS_FOR_MENTIONS)
+            # Get list of tweet IDs we have already responded to
             mentions = f.read()
             for tweet in tweets['data']:
-                # print(mentions)
-                # print(tweet['id'],type(tweet['id'])) 
                 if tweet['id'] not in mentions:
-                    
-                    try:
-                        self.client.create_tweet(text=OpenAI_API.reply_to_tweet(tweet['text']),in_reply_to_tweet_id=tweet['id'])
-                    except Exception as e:
-                        print(tweet['text'])
-                        print(e)
-                        
+                    # Respond to tweet on Twitter
+                    self.client.create_tweet(text=OpenAI_API.reply_to_tweet(tweet['text']),in_reply_to_tweet_id=tweet['id'])
+                    # Add tweet ID to the mentions.txt file to store what tweets we have responded to already.
                     f.write(tweet['id']+'\n')
+                    # Reset pointer
                     f.seek(0)
+                    # Refresh mentions to include the newly added tweet IDs
                     mentions = f.read()
 
 # Manually trigger mention response

@@ -1,6 +1,5 @@
 # Module Imports
 from variables import *
-
 # Library Imports
 import datetime
 import requests
@@ -8,7 +7,6 @@ import pandas as pd
 import io
 import yfinance as yf
 import typing
-
 import warnings
 warnings.simplefilter(action='ignore', category=FutureWarning)
 import requests

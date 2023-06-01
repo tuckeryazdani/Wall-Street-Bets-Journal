@@ -25,7 +25,8 @@ def reply_to_tweet(tweet : str):
         result = ''
         for choice in response.choices:
             result += choice.message.content
-        print(result)
+        print(f'Responding to tweet:\n{tweet}')
+        print(f'Response:\n{result}')
         return result
     
     except Exception as e:
