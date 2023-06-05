@@ -1,0 +1,5 @@
+openai==0.27.6
+tweepy==4.12.1
+praw==7.7.0
+pandas==1.5.3
+yfinance==0.2.9

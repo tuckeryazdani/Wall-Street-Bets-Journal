@@ -35,3 +35,4 @@ def reply_to_tweet(tweet : str):
             reply_to_tweet(tweet)
         else:
             print(e)
+            raise e

@@ -10,3 +10,12 @@ Languages : <i> Python, HTML, CSS </i>
 <br>
 Libraries : <i> pandas, datetime, requests, io, typing, warnings, yfinance, praw, tweepy, openai </i>
 <br>
+
+Docker container instructions:
+Run the following commands
+
+Build a docker container. You can change the name "wsb_journal" to whatever name you might like.
+docker build -t wsb_journal .
+
+Then we run the container.
+docker run --name wsb_journal wsb_journal
