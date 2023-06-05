@@ -27,13 +27,13 @@ class Twitter_API:
             self.client.create_tweet(text=tweet)
         except Exception as e:
             # Open file with 'a' parameter for appending only.
-            with open('logs.txt','a') as f:
+            with open('./logs/logs.txt','a') as f:
                 f.write(f'{datetime.date.today()}\n{e}\n\n')
             raise e
     
     def respond_to_mentions(self):
         # Open .txt file that stores tweet IDs of tweets we responded to in the past
-        with open('mentions.txt','r+') as f:
+        with open('./logs/mentions.txt','r+') as f:
             # Query all tweets that contain "@WSB_Journal"
             tweets = self.client.search_recent_tweets(query='@WSB_Journal',max_results=TWITTER_MAX_QUERY_RESULTS_FOR_MENTIONS)
             # Get list of tweet IDs we have already responded to
