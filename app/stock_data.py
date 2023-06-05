@@ -12,6 +12,23 @@ warnings.simplefilter(action='ignore', category=FutureWarning)
 import requests
 from bs4 import BeautifulSoup
 
+# Seasonal data for the year 2000. (Leap year)
+START_OF_YEAR = datetime.date(2000,1,1)
+END_OF_YEAR = datetime.date(2000,12,31)
+
+START_OF_WINTER = datetime.date(2000,12,21)
+END_OF_WINTER   = datetime.date(2000,3,19)
+
+START_OF_SPRING = datetime.date(2000,3,20)
+END_OF_SPRING   = datetime.date(2000,6,20)
+
+START_OF_SUMMER = datetime.date(2000,6,21)
+END_OF_SUMMER   = datetime.date(2000,9,22)
+
+START_OF_FALL = datetime.date(2000,9,23)
+END_OF_FALL   = datetime.date(2000,12,20)
+# End seasonal data for year 2000. (Leap year)
+
 # Define a function to get the company name to ticker dictionary
 def get_company_name_to_ticker_dict():
     # Use a constant for the URL

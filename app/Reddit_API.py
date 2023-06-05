@@ -5,7 +5,7 @@ import pandas as pd
 
 class Reddit_API:
     
-    def __init__(self, COMPANY_NAME_TO_TICKER : dict):
+    def __init__(self, COMPANY_NAME_TO_TICKER : dict, post_scan_limit):
         self.reddit = praw.Reddit(
             client_id = REDDIT_CLIENT_ID,
             client_secret = REDDIT_CLIENT_SECRET,
@@ -14,7 +14,8 @@ class Reddit_API:
             password = REDDIT_PASSWORD
         )
         self.stocks = list(COMPANY_NAME_TO_TICKER.keys())
-    
+        self.post_scan_limit = post_scan_limit
+
     def get_count_of_stock_mentions(self,desired_subreddit : str):
         '''
         Web scrapes Reddit for comments on the desiredSubreddit (Usually WallStreetBets). It then returns the stocks mentioned with counts as a dictionary.
@@ -28,7 +29,7 @@ class Reddit_API:
         # comments=[]
         # Finding subreddit in Reddit, then finding posts, then finding comments. Add the comment count and stocks found to stocksMentioned dictionary.
         subreddit = self.reddit.subreddit(desired_subreddit)
-        for submission in subreddit.hot(limit=REDDIT_POSTS_TO_SCAN):
+        for submission in subreddit.hot(limit=self.post_scan_limit):
             for comment in submission.comments:
                 if hasattr(comment,"body"):
                     lowerComment=comment.body.lower()

@@ -14,12 +14,12 @@ warnings.simplefilter(action='ignore', category=FutureWarning)
 def main():
     
     # Begin script.
-    
+    DESIRED_SUBREDDIT = r"wallstreetbets"
     # Get dictionary that converts company name to its ticker and also get top 500 companeis.
     COMPANY_NAME_TO_TICKER = stock_data.get_company_name_to_ticker_dict()
     
     # Initialize Reddit_API object to create a connection to the Reddit API.
-    reddit_client = Reddit_API(COMPANY_NAME_TO_TICKER)
+    reddit_client = Reddit_API(COMPANY_NAME_TO_TICKER, 100)
     # Call the get_count_of_stock_mentions function to return a dictionary of stocks found and the number of times they were mentioned.
     stock_names_found = reddit_client.get_count_of_stock_mentions(DESIRED_SUBREDDIT)
     print(f'Stocks Found: {stock_names_found}')
