@@ -29,21 +29,14 @@ def push_to_git():
 
 if __name__ == '__main__':
     tweet = wsb.main()
+        
+    # Change working directory to use the repository of the website.
+    os.chdir(WEBSITE_REPO_PATH)
+    # Ensure that the repo is updated.
+    os.system(f'git pull origin {GIT_BRANCH}')
 
-    try:
-        
-        # Change working directory to use the repository of the website.
-        os.chdir(WEBSITE_REPO_PATH)
-        # Ensure that the repo is updated.
-        os.system(f'git pull origin {GIT_BRANCH}')
-
-        # Add the twitter post to the twitter HTML page.
-        write_to_website(tweet)
-        
-        # Push changes to git.
-        push_to_git()
-        
-    except Exception as e:
-        print('This error is likely due to running the file in a docker container which does not have the git repository for your website.')
-        print('A solution/workaround to this in a docker container is still beign developed.')
-        raise e
+    # Add the twitter post to the twitter HTML page.
+    write_to_website(tweet)
+    
+    # Push changes to git.
+    push_to_git()
