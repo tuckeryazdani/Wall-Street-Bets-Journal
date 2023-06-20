@@ -1,5 +1,7 @@
 # WSB_Journal ( Wall Street Bets Journal )
 
+This project has been discontinued due to the Twitter and Reddit API now charging for the use of their services. (06/2023)
+
 This project is fully automated in Python using various APIs to pull data, get stock market updates depending on that data, getting seasonal information on how that stock performs in the given and next season, and then posting that data to Twitter. I have updated this program to be able to then take that tweet, add it to the Twitter website HTML page in Python, and then push the changes using git in the os Python library, so that it will now show up here as well for logging purposes.<br>
 <br>
 The Twitter account will also respond with funny responses if you tweet at it that are AI generated from ChatGPT 3.5. Warning: These responses are completely AI generated.<br>
@@ -22,5 +24,3 @@ docker run --name wsb_journal wsb_journal<br>
 <br>
 Note that due to this being a public repository I have removed the variables.py file which contains various API keys for this project.<br>
 <br>
-# In Development:<br>
-Working having the tweet publish to my website using a SSH key to the git repository instead of having an entire git respository locally which causes problems when dockerizing the applicaton.<br>
